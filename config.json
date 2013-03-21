@@ -1,0 +1,14 @@
+{
+  "db": {
+    "port": 27017,
+    "host": "localhost",
+    "username": "foo",
+    "password": "bar"
+  },
+  "server": {
+    "port": 3500,
+    "address": "0.0.0.0"
+  },
+  "flavor": "nounderscore",
+  "debug": true
+}

@@ -1,0 +1,21 @@
+{
+  "name": "crest",
+  "description": "REST Server for MongoDB",
+  "version": "0.0.1",
+  "author": "Ricard Aspeljung <ricard@opendia.se>",
+  "private": true,
+  "dependencies": {
+    "mongodb": ">=1.2.14",
+    "restify": ">=2.3.4",
+    "supertest": ">=0.5.1",
+    "mocha": ">=1.8.2"
+  },
+  "keywords": ["mongodb", "mongo", "db", "rest", "restful", "api"],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cordazar/crest.git"
+  },
+  "engines": {
+    "node": ">=0.8"
+  }
+}
