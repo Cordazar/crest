@@ -9,6 +9,6 @@
     "port": 3500,
     "address": "0.0.0.0"
   },
-  "flavor": "nounderscore",
+  "flavor": "normal",
   "debug": true
 }

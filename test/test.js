@@ -5,6 +5,19 @@ var main = require('../server'),
 
 var objectId;
 
+main.config.flavor = "normal";
+delete main.config.db.username;
+delete main.config.db.password;
+
+function parseBody(body) {
+  if (body instanceof Error) {
+    return false;
+  }
+  if (Buffer.isBuffer(body)) {
+    return true;
+  }
+}
+
 describe("Testing crest", function () {
 
   after(function (done) {
@@ -26,14 +39,12 @@ describe("Testing crest", function () {
     };
     var post_req = http.request(post_options, function (res) {
       res.on('data', function (body) {
-        if (body instanceof Error) {
-          return body.stack;
+        if (parseBody(body)) {
+          body = body.toString();
+        } else {
+          return body.stack();
         }
-        var chunk;
-        if (Buffer.isBuffer(body)) {
-          chunk = body.toString();
-        }
-        assert.equal(JSON.parse(chunk), '{"ok":1}');
+        assert.deepEqual(JSON.parse(body), {"ok": 1});
         assert.equal(res.statusCode, 201);
         var location = res.header('Location').split('/').slice(1);
 
@@ -57,10 +68,10 @@ describe("Testing crest", function () {
       method: 'GET'
     };
     http.get(get_options, function (res) {
-      res.on('data', function (body) {
-        assert.deepEqual(JSON.parse(body), {
+      res.on('data', function (chunk) {
+        assert.deepEqual(JSON.parse(chunk), {
           "test": "create",
-          "_id": objectId
+          "id": objectId
         });
         assert.equal(res.statusCode, 200);
         done();
@@ -81,14 +92,12 @@ describe("Testing crest", function () {
     };
     var update_req = http.request(update_options, function (res) {
       res.on('data', function (body) {
-        if (body instanceof Error) {
-          return body.stack;
+        if (parseBody(body)) {
+          body = body.toString();
+        } else {
+          return body.stack();
         }
-        var chunk;
-        if (Buffer.isBuffer(body)) {
-          chunk = body.toString();
-        }
-        assert.equal(JSON.parse(chunk), '{"ok":1}');
+        assert.deepEqual(JSON.parse(body), {"ok": 1});
         assert.equal(res.statusCode, 200);
         done();
       });
@@ -105,15 +114,16 @@ describe("Testing crest", function () {
       method: 'GET'
     };
     http.get(get_options, function (res) {
-      res.on('data', function (body) {
-        assert.deepEqual(JSON.parse(body), {
+      res.on('data', function (chunk) {
+        assert.deepEqual(JSON.parse(chunk), {
           "test": "updated",
-          "_id": objectId
+          "id": objectId
         });
         assert.equal(res.statusCode, 200);
         done();
       });
     });
+
   });
 
   it("Should delete a document", function (done) {
@@ -125,14 +135,12 @@ describe("Testing crest", function () {
     };
     var delete_req = http.request(delete_options, function (res) {
       res.on('data', function (body) {
-        if (body instanceof Error) {
-          return body.stack;
+        if (parseBody(body)) {
+          body = body.toString();
+        } else {
+          return body.stack();
         }
-        var chunk;
-        if (Buffer.isBuffer(body)) {
-          chunk = body.toString();
-        }
-        assert.equal(JSON.parse(chunk), '{"ok":1}');
+        assert.deepEqual(JSON.parse(body), {"ok": 1});
         assert.equal(res.statusCode, 200);
         done();
       });

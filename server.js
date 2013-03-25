@@ -7,7 +7,7 @@
 
 var fs = require("fs"),
   mongodb = require("mongodb"),
-  restify = require("restify");
+  restify = module.exports.restify = require("restify");
 
 var DEBUGPREFIX = "DEBUG: ";
 
@@ -20,8 +20,8 @@ var config = {
     "port": 3500,
     "address": "0.0.0.0"
   },
-  "flavor": "regular",
-  "debug": true
+  "flavor": "mongodb",
+  "debug": false
 };
 
 var debug = module.exports.debug = function (str) {
@@ -33,7 +33,7 @@ var debug = module.exports.debug = function (str) {
 try {
   config = JSON.parse(fs.readFileSync(process.cwd() + "/config.json"));
 } catch (e) {
-  debug("No config.json file found. Using default config.");
+  debug("No config.json file found. Fall back to default config.");
 }
 
 module.exports.config = config;

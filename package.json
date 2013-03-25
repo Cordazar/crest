@@ -1,21 +1,37 @@
 {
   "name": "crest",
   "description": "REST Server for MongoDB",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Ricard Aspeljung <ricard@opendia.se>",
   "private": true,
-  "dependencies": {
-    "mongodb": ">=1.2.14",
-    "restify": ">=2.3.4",
-    "supertest": ">=0.5.1",
-    "mocha": ">=1.8.2"
+  "main": "server.js",
+  "directories": {
+    "lib": "./lib"
   },
-  "keywords": ["mongodb", "mongo", "db", "rest", "restful", "api"],
+  "keywords": [
+    "mongodb",
+    "mongo",
+    "db",
+    "rest",
+    "restful",
+    "api"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/cordazar/crest.git"
   },
+  "dependencies": {
+    "mongodb": "1.2.x",
+    "restify": "2.3.x"
+  },
+  "devDependencies": {
+    "supertest": "0.5.x",
+    "mocha": "1.8.x"
+  },
   "engines": {
     "node": ">=0.8"
+  },
+  "scripts": {
+    "test": "mocha -R spec"
   }
 }
