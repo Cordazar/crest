@@ -4,18 +4,54 @@
 crest stands for [Cygnus](http://en.wiktionary.org/wiki/Cygnus) REST.
 
 
+## Installation
+> npm install crest
+
+
 ## Usage
 Run server with `node server`
 
 ### Quick try
 After starting the server you can quickly try it out by issuing the following from the command line:
-`curl -d '{ "example key" : " }' -H "Content-Type: application/json" http://localhost:3500/tests/example`
+> curl -d '{ "example key" : " }' -H "Content-Type: application/json" http://localhost:3500/tests/example
 
-This should add a document to the collection **example** in database **tests**, like so: `{ "A1": 201, "_id": ObjectId("4e90e196b0c7f4687000000e") }`
+This should add a document to the collection **example** in database **tests** looking similar to this: `{ "A1": 201, "_id": ObjectId("4e90e196b0c7f4687000000e") }`
+
+### Supported REST requests
+* `GET /db/collection` - Returns all documents
+* `GET /db/collection` - Returns all documents (query and options in GET body)
+* `GET /db/collection?query=%7B%22isDone%22%3A%20false%7D` - Returns all documents satisfying query
+* `GET /db/collection?query=%7B%22isDone%22%3A%20false%7D&limit=2&skip=2` - Ability to add options to query (limit, skip, etc)
+* `GET /db/collection/id` - Returns document with _id_
+* `POST /db/collection` - Insert new document in collection (document in POST body)
+* `PUT /db/collection/id` - Update document with _id_ (updated document in PUT body)
+* `DELETE /db/collection/id` - Delete document with _id_
+
+### Content Type
+* Please make sure `application/json` is used as Content-Type when using POST/PUT/GET with data in request body.
 
 
-## Installation
-Clone repository and you can just run it directly from the repository folder. NPM install will come at a later time.
+## Setup
+
+### Configuration parameters
+* `db` [object]
+	* `host` [string] (required)
+	* `port` [string] (required)
+    * `username` [string] (optional)
+    * `password` [string] (optional)
+* `server` [object]
+	* `port` [string] (required)
+	* `address` [string] (required)
+* `flavor` [string] _mongodb_ or _normal_
+* `debug` [boolean]
+
+#### Flavors
+* Choose **mongodb** as flavor to keep using *_id* as primary key for a document.
+* Choose **normal** as flavor if you want to change *_id* to *id*
+
+### Dependencies
+Application dependencies are sorted under dependencies in _package.json_ while test dependencies are sorted under devDependencies. 
+All dependencies can be installed via `npm install -l`
 
 
 ## Tests
