@@ -3,7 +3,6 @@
   "description": "REST Server for MongoDB",
   "version": "0.0.2",
   "author": "Ricard Aspeljung <ricard@opendia.se>",
-  "private": true,
   "main": "server.js",
   "directories": {
     "lib": "./lib"
