@@ -41,6 +41,7 @@ module.exports.config = config;
 var server = restify.createServer({
   name: "crest"
 });
+server.acceptable = ['application/json'];
 server.use(restify.acceptParser(server.acceptable));
 server.use(restify.bodyParser());
 server.use(restify.fullResponse());

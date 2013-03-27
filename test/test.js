@@ -1,22 +1,15 @@
 var main = require('../server'),
-  request = require('supertest'),
+  supertest = require('supertest'),
   assert = require('assert'),
   http = require('http');
 
 var objectId;
 
+var request = supertest(main.server);
+
 main.config.flavor = "normal";
 delete main.config.db.username;
 delete main.config.db.password;
-
-function parseBody(body) {
-  if (body instanceof Error) {
-    return false;
-  }
-  if (Buffer.isBuffer(body)) {
-    return true;
-  }
-}
 
 describe("Testing crest", function () {
 
@@ -26,141 +19,90 @@ describe("Testing crest", function () {
   });
 
   it("Should create a simple document", function (done) {
-    var post_data = '{"test":"create"}';
-    var post_options = {
-      host: main.config.server.host,
-      port: main.config.server.port,
-      path: '/tests/tests',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': post_data.length
-      }
-    };
-    var post_req = http.request(post_options, function (res) {
-      res.on('data', function (body) {
-        if (parseBody(body)) {
-          body = body.toString();
-        } else {
-          return body.stack();
+    request
+      .post('/tests/tests')
+      .type('application/json')
+      .send({"test" : "create"})
+      .expect(201)
+      .end(function (err, res) {
+        if (err) {
+          return done(err);
         }
-        assert.deepEqual(JSON.parse(body), {"ok": 1});
-        assert.equal(res.statusCode, 201);
-        var location = res.header('Location').split('/').slice(1);
-
+        console.log(res);
+        assert.deepEqual(res.body, {"ok": 1});
+        var location = res.header.location.split('/').slice(1);
         assert.equal(location[0], 'tests');
         assert.equal(location[1], 'tests');
-        assert.notEqual(location[2], null);
         assert.equal(location[2].length, 24);
         objectId = location[2];
         done();
       });
-    });
-    post_req.write(post_data);
-    post_req.end();
   });
 
   it("Should check that document exists", function (done) {
-    var get_options = {
-      host: main.config.server.host,
-      port: main.config.server.port,
-      path: '/tests/tests/' + objectId,
-      method: 'GET'
-    };
-    http.get(get_options, function (res) {
-      res.on('data', function (chunk) {
-        assert.deepEqual(JSON.parse(chunk), {
+    request
+      .get('/tests/tests/' + objectId)
+      .expect(200)
+      .end(function (err, res) {
+        if (err) {
+          return done(err);
+        }
+        assert.deepEqual(res.body, {
           "test": "create",
           "id": objectId
         });
-        assert.equal(res.statusCode, 200);
         done();
       });
-    });
   });
 
   it("Should update a document", function (done) {
-    var update_data = '{"test": "updated"}';
-    var update_options = {
-      host: main.config.server.host,
-      port: main.config.server.port,
-      path: '/tests/tests/' + objectId,
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    var update_req = http.request(update_options, function (res) {
-      res.on('data', function (body) {
-        if (parseBody(body)) {
-          body = body.toString();
-        } else {
-          return body.stack();
+    request
+      .put('/tests/tests/' + objectId)
+      .type('application/json')
+      .send({"test" : "updated"})
+      .expect(200)
+      .end(function (err, res) {
+        if (err) {
+          return done(err);
         }
-        assert.deepEqual(JSON.parse(body), {"ok": 1});
-        assert.equal(res.statusCode, 200);
+        assert.deepEqual(res.body, {"ok": 1});
         done();
       });
-    });
-    update_req.write(update_data);
-    update_req.end();
   });
 
   it("Should check that document is updated", function (done) {
-    var get_options = {
-      host: main.config.server.host,
-      port: main.config.server.port,
-      path: '/tests/tests/' + objectId,
-      method: 'GET'
-    };
-    http.get(get_options, function (res) {
-      res.on('data', function (chunk) {
-        assert.deepEqual(JSON.parse(chunk), {
+    request
+      .get('/tests/tests/' + objectId)
+      .expect(200)
+      .end(function (err, res) {
+        if (err) {
+          return done(err);
+        }
+        assert.deepEqual(res.body, {
           "test": "updated",
           "id": objectId
         });
-        assert.equal(res.statusCode, 200);
         done();
       });
-    });
-
   });
 
   it("Should delete a document", function (done) {
-    var delete_options = {
-      host: main.config.server.host,
-      port: main.config.server.port,
-      path: '/tests/tests/' + objectId,
-      method: 'DELETE'
-    };
-    var delete_req = http.request(delete_options, function (res) {
-      res.on('data', function (body) {
-        if (parseBody(body)) {
-          body = body.toString();
-        } else {
-          return body.stack();
+    request
+      .del('/tests/tests/' + objectId)
+      .expect(200)
+      .end(function (err, res) {
+        if (err) {
+          return done(err);
         }
-        assert.deepEqual(JSON.parse(body), {"ok": 1});
-        assert.equal(res.statusCode, 200);
+        assert.deepEqual(res.body, {"ok": 1});
         done();
       });
-    });
-    delete_req.end();
   });
 
   it("Should check that document is deleted", function (done) {
-    var get_options = {
-      host: main.config.server.host,
-      port: main.config.server.port,
-      path: '/tests/tests/' + objectId,
-      method: 'GET'
-    };
-    http.get(get_options, function (res) {
-      res.on('end', function (body) {
-        assert.equal(res.statusCode, 404);
-        done();
-      });
-    });
+    request
+      .get('/tests/tests/' + objectId)
+      .expect(404, done);
   });
 
 });
