@@ -1,13 +1,21 @@
+/**
+ * Copyright 2013 Ricard Aspeljung. All Rights Reserved.
+ *
+ * test.js
+ * crest
+ */
+
 var main = require('../server'),
   supertest = require('supertest'),
   assert = require('assert'),
   http = require('http');
 
 var objectId;
-
 var request = supertest(main.server);
 
+/* Setting up configuration for testing */
 main.config.flavor = "normal";
+main.config.debug = false;
 delete main.config.db.username;
 delete main.config.db.password;
 
@@ -28,7 +36,6 @@ describe("Testing crest", function () {
         if (err) {
           return done(err);
         }
-        console.log(res);
         assert.deepEqual(res.body, {"ok": 1});
         var location = res.header.location.split('/').slice(1);
         assert.equal(location[0], 'tests');
