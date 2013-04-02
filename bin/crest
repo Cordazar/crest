@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+
+/**
+ * Copyright 2013 Ricard Aspeljung. All Rights Reserved.
+ *
+ * bin/crest
+ * crest
+ */
+
+
+var crest = require('../server');
