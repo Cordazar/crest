@@ -5,17 +5,35 @@ crest stands for [Cygnus](http://en.wiktionary.org/wiki/Cygnus) REST.
 
 
 ## Installation
-> npm install crest
+
+### Recommended way
+	npm install crest -g
+
+This will install crest globally so that it may be run from the command line.
+
+### As node.js module
+	npm install crest
+
+This will install crest as a module to be used as a part of some other project.
+
+### Clone with git
+	git clone git://github.com/Cordazar/crest.git
 
 
 ## Usage
-Run server with `node server`
+If installed globally you can just run
+
+	crest
+
 
 ### Quick try
 After starting the server you can quickly try it out by issuing the following from the command line:
-> curl -d '{ "example key" : " }' -H "Content-Type: application/json" http://localhost:3500/tests/example
 
-This should add a document to the collection **example** in database **tests** looking similar to this: `{ "A1": 201, "_id": ObjectId("4e90e196b0c7f4687000000e") }`
+	curl -d '{ "example key" : " }' -H "Content-Type: application/json" http://localhost:3500/tests/example
+
+This should add a document to the collection **example** in database **tests** looking similar to this: 
+
+	{ "A1": 201, "_id": ObjectId("4e90e196b0c7f4687000000e") }
 
 ### Supported REST requests
 * `GET /db/collection` - Returns all documents
@@ -35,13 +53,13 @@ This should add a document to the collection **example** in database **tests** l
 
 ### Configuration parameters
 * `db` [object]
-	* `host` [string] (required)
-	* `port` [string] (required)
-    * `username` [string] (optional)
-    * `password` [string] (optional)
+	* `host` [string]
+	* `port` [string]
+    * `username` [string]
+    * `password` [string]
 * `server` [object]
-	* `port` [string] (required)
-	* `address` [string] (required)
+	* `port` [string]
+	* `address` [string]
 * `flavor` [string] _mongodb_ or _normal_
 * `debug` [boolean]
 
