@@ -1,0 +1,180 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Crest by Cordazar</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>Crest</h1>
+        <p>REST API Server for MongoDB</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/Cordazar/crest" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/Cordazar/crest/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/Cordazar/crest/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>crest</h1>
+
+<p><a href="http://github.com/cordazar/crest">crest</a> is a REST API Server for MongoDB.
+crest stands for <a href="http://en.wiktionary.org/wiki/Cygnus">Cygnus</a> REST.</p>
+
+<h2>Installation</h2>
+
+<h3>Recommended way</h3>
+
+<pre><code>npm install crest -g
+</code></pre>
+
+<p>This will install crest globally so that it may be run from the command line.</p>
+
+<h3>As node.js module</h3>
+
+<pre><code>npm install crest
+</code></pre>
+
+<p>This will install crest as a module to be used as a part of some other project.</p>
+
+<h3>Clone with git</h3>
+
+<pre><code>git clone git://github.com/Cordazar/crest.git
+</code></pre>
+
+<h2>Usage</h2>
+
+<p>If installed globally you can just run</p>
+
+<pre><code>crest
+</code></pre>
+
+<h3>Quick try</h3>
+
+<p>After starting the server you can quickly try it out by issuing the following from the command line:</p>
+
+<pre><code>curl -d '{ "example key" : " }' -H "Content-Type: application/json" http://localhost:3500/tests/example
+</code></pre>
+
+<p>This should add a document to the collection <strong>example</strong> in database <strong>tests</strong> looking similar to this: </p>
+
+<pre><code>{ "A1": 201, "_id": ObjectId("4e90e196b0c7f4687000000e") }
+</code></pre>
+
+<h3>Supported REST requests</h3>
+
+<ul>
+<li>
+<code>GET /db/collection</code> - Returns all documents</li>
+<li>
+<code>GET /db/collection</code> - Returns all documents (query and options in GET body)</li>
+<li>
+<code>GET /db/collection?query=%7B%22isDone%22%3A%20false%7D</code> - Returns all documents satisfying query</li>
+<li>
+<code>GET /db/collection?query=%7B%22isDone%22%3A%20false%7D&amp;limit=2&amp;skip=2</code> - Ability to add options to query (limit, skip, etc)</li>
+<li>
+<code>GET /db/collection/id</code> - Returns document with <em>id</em>
+</li>
+<li>
+<code>POST /db/collection</code> - Insert new document in collection (document in POST body)</li>
+<li>
+<code>PUT /db/collection/id</code> - Update document with <em>id</em> (updated document in PUT body)</li>
+<li>
+<code>DELETE /db/collection/id</code> - Delete document with <em>id</em>
+</li>
+</ul><h3>Content Type</h3>
+
+<ul>
+<li>Please make sure <code>application/json</code> is used as Content-Type when using POST/PUT/GET with data in request body.</li>
+</ul><h2>Setup</h2>
+
+<h3>Configuration parameters</h3>
+
+<ul>
+<li>
+<code>db</code> [object]
+
+<ul>
+<li>
+<code>host</code> [string]</li>
+<li>
+<code>port</code> [string]</li>
+<li>
+<code>username</code> [string]</li>
+<li>
+<code>password</code> [string]</li>
+</ul>
+</li>
+<li>
+<code>server</code> [object]
+
+<ul>
+<li>
+<code>port</code> [string]</li>
+<li>
+<code>address</code> [string]</li>
+</ul>
+</li>
+<li>
+<code>flavor</code> [string] <em>mongodb</em> or <em>normal</em>
+</li>
+<li>
+<code>debug</code> [boolean]</li>
+</ul><h4>Flavors</h4>
+
+<ul>
+<li>Choose <strong>mongodb</strong> as flavor to keep using <em>_id</em> as primary key for a document.</li>
+<li>Choose <strong>normal</strong> as flavor if you want to change <em>_id</em> to <em>id</em>
+</li>
+</ul><h3>Dependencies</h3>
+
+<p>Application dependencies are sorted under dependencies in <em>package.json</em> while test dependencies are sorted under devDependencies. 
+All dependencies can be installed via <code>npm install -l</code></p>
+
+<h2>Tests</h2>
+
+<p>Basic tests are available and can be run via <a href="http://visionmedia.github.com/mocha/">mocha</a>.</p>
+
+<h2>License</h2>
+
+<p>The MIT License (MIT)
+Copyright (c) 2013 Ricard Aspeljung</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/Cordazar">Cordazar</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
