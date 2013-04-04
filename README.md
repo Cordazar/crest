@@ -3,6 +3,12 @@
 [crest](http://github.com/cordazar/crest) is a REST API Server for MongoDB.
 crest stands for [Cygnus](http://en.wiktionary.org/wiki/Cygnus) REST.
 
+## About
+
+The idea for crest was born when we needed a REST API for a MongoDB project at work and we only found a few alternatives out there built in ruby, python and nodejs. We didn't want to run the ruby one in that particular project and the nodejs alternative was an alpha version not updated in 3 years. We went with the one built in python but we soon found out that it has no way of configuring it without rewriting the code and it also has problems with stability.
+
+So this is my attempt at building a small and easy to use REST API Server for MongoDB with primary focus on json. Since this is my first time building a REST API I'll appreciate any and all feedback.
+
 
 ## Installation
 
@@ -36,32 +42,55 @@ This should add a document to the collection **example** in database **tests** l
 	{ "A1": 201, "_id": ObjectId("4e90e196b0c7f4687000000e") }
 
 ### Supported REST requests
-* `GET /db/collection` - Returns all documents
-* `GET /db/collection` - Returns all documents (query and options in GET body)
-* `GET /db/collection?query=%7B%22isDone%22%3A%20false%7D` - Returns all documents satisfying query
-* `GET /db/collection?query=%7B%22isDone%22%3A%20false%7D&limit=2&skip=2` - Ability to add options to query (limit, skip, etc)
-* `GET /db/collection/id` - Returns document with _id_
-* `POST /db/collection` - Insert new document in collection (document in POST body)
-* `PUT /db/collection/id` - Update document with _id_ (updated document in PUT body)
-* `DELETE /db/collection/id` - Delete document with _id_
+	GET /db/collection
+Returns all documents (query and options can be sent in GET body)
+
+	GET /db/collection?query=%7B%22isDone%22%3A%20false%7D
+Returns all documents satisfying query
+
+	GET /db/collection?query=%7B%22isDone%22%3A%20false%7D&limit=2&skip=2
+Ability to add options to query (limit, skip, etc)
+	
+	GET /db/collection/id
+Returns document with _id_
+	
+	POST /db/collection
+Insert new document in collection (document in POST body)
+	
+	PUT /db/collection/id
+Update document with _id_ (updated document in PUT body)
+	
+	DELETE /db/collection/
+Delete document with _id_
 
 ### Content Type
-* Please make sure `application/json` is used as Content-Type when using POST/PUT/GET with data in request body.
+Please make sure `application/json` is used as Content-Type when using POST/PUT/GET with data in request body.
 
 
 ## Setup
 
 ### Configuration parameters
-* `db` [object]
-	* `host` [string]
-	* `port` [string]
-    * `username` [string]
-    * `password` [string]
-* `server` [object]
-	* `port` [string]
-	* `address` [string]
-* `flavor` [string] _mongodb_ or _normal_
-* `debug` [boolean]
+
+These parameters are saved in __config.json__.
+
+Database settings where username and password are optional.
+
+	db [object]
+		host [string]
+		port [string]
+	    username [string] (optional)
+	    password [string] (optional)
+
+Server settings for where and how the rest api is going to be run.
+
+	server [object]
+	 	port [string] 
+		address	[string]
+
+General settings
+
+	flavor [string] (mongodb or normal)
+	debug [boolean]
 
 #### Flavors
 * Choose **mongodb** as flavor to keep using *_id* as primary key for a document.
@@ -69,11 +98,18 @@ This should add a document to the collection **example** in database **tests** l
 
 ### Dependencies
 Application dependencies are sorted under dependencies in _package.json_ while test dependencies are sorted under devDependencies. 
-All dependencies can be installed via `npm install -l`
 
 
 ## Tests
-Basic tests are available and can be run via [mocha](http://visionmedia.github.com/mocha/).
+Basic tests are available and can be run via [mocha](http://visionmedia.github.com/mocha/). 
+
+These tests require a working mongodb installation and might require changes to __config.json__
+
+Recommended way to run mocha in terminal with mocha reporter _spec_ chosen.
+
+	mocha -R spec
+	
+More indepth tests will be added at a later date. 
 
 
 ## License
