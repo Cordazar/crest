@@ -39,6 +39,6 @@
   },
   "preferGlobal": true,
   "bin": {
-    "http-server": "./bin/http-server"
+    "server": "./bin/server"
   }
 }
