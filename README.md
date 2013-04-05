@@ -1,13 +1,14 @@
-# crest
+# Crest
 
-[crest](http://github.com/cordazar/crest) is a REST API Server for MongoDB.
-crest stands for [Cygnus](http://en.wiktionary.org/wiki/Cygnus) REST.
+[Crest](http://github.com/cordazar/crest) is a REST API Server for MongoDB.
 
 ## About
 
 The idea for crest was born when we needed a REST API for a MongoDB project at work and we only found a few alternatives out there built in ruby, python and nodejs. We didn't want to run the ruby one in that particular project and the nodejs alternative was an alpha version not updated in 3 years. We went with the one built in python but we soon found out that it has no way of configuring it without rewriting the code and it also has problems with stability.
 
 So this is my attempt at building a small and easy to use REST API Server for MongoDB with primary focus on json. Since this is my first time building a REST API I'll appreciate any and all feedback.
+
+Crest stands for [Cygnus](http://en.wiktionary.org/wiki/Cygnus) REST where cygnus is latin for swan.
 
 
 ## Installation
@@ -35,11 +36,11 @@ If installed globally you can just run
 ### Quick try
 After starting the server you can quickly try it out by issuing the following from the command line:
 
-	curl -d '{ "example key" : " }' -H "Content-Type: application/json" http://localhost:3500/tests/example
+	curl -d '{ "Key" : 42 }' -H "Content-Type: application/json" http://localhost:3500/test/example
 
-This should add a document to the collection **example** in database **tests** looking similar to this: 
+This should add a document to the collection **example** in database **test** looking similar to this: 
 
-	{ "A1": 201, "_id": ObjectId("4e90e196b0c7f4687000000e") }
+	{ "Key": 42, "_id": ObjectId("4e90e196b0c7f4687000000e") }
 
 ### Supported REST requests
 	GET /db/collection
@@ -110,6 +111,11 @@ Recommended way to run mocha in terminal with mocha reporter _spec_ chosen.
 	mocha -R spec
 	
 More indepth tests will be added at a later date. 
+
+
+##Bugs
+
+Issues can be found at https://github.com/cordazar/crest/issues
 
 
 ## License
