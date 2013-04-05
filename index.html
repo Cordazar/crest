@@ -14,7 +14,7 @@
         <![endif]-->
 
         <script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
           m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
           })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
@@ -36,6 +36,9 @@
             </p></header><nav>
             <ul class="nav">
                 <li>
+                    <a href="#about">About</a>
+                </li>
+                <li>
                     <a href="#installation">Installation</a>
                 </li>
                 <li>
@@ -48,144 +51,133 @@
                     <a href="#tests">Test</a>
                 </li>
                 <li>
+                    <a href="#bugs">Bugs</a>
+                </li>
+                <li>
                     <a href="#license">License</a>
                 </li>
-            </ul></nav><section>
+            </ul>
+        </nav>
+        <section>
             <h1>
-                crest
+                Crest
             </h1>
             <p>
-                <a href="http://github.com/cordazar/crest">crest</a> is a REST API Server for MongoDB. crest stands for <a href="http://en.wiktionary.org/wiki/Cygnus">Cygnus</a> REST.
+                <a href="http://github.com/cordazar/crest">Crest</a> is a REST API Server for MongoDB.
             </p>
+            <h2 id="about">About</h2>
+
+            <p>The idea for crest was born when we needed a REST API for a MongoDB project at work and we only found a few alternatives out there built in ruby, python and nodejs. We didn't want to run the ruby one in that particular project and the nodejs alternative was an alpha version not updated in 3 years. We went with the one built in python but we soon found out that it has no way of configuring it without rewriting the code and it also has problems with stability.</p>
+
+            <p>So this is my attempt at building a small and easy to use REST API Server for MongoDB with primary focus on json. Since this is my first time building a REST API I'll appreciate any and all feedback.</p>
+            <p>Crest stands for <a href="http://en.wiktionary.org/wiki/Cygnus">Cygnus</a> REST where cygnus is latin for swan.</p>
+
             <h2 id="installation">
                 Installation
             </h2>
             <h3>
                 Recommended way
             </h3>
-            <pre>
-<code>npm install crest -g</code>
-</pre>
+            <pre><code>npm install crest -g</code></pre>
             <p>
                 This will install crest globally so that it may be run from the command line.
             </p>
             <h3>
                 As node.js module
             </h3>
-            <pre>
-<code>npm install crest</code>
-</pre>
+            <pre><code>npm install crest</code></pre>
             <p>
                 This will install crest as a module to be used as a part of some other project.
             </p>
             <h3>
                 Clone with git
             </h3>
-            <pre>
-<code>git clone git://github.com/Cordazar/crest.git</code>
-</pre>
+            <pre><code>git clone git://github.com/Cordazar/crest.git</code></pre>
             <h2 id="usage">
                 Usage
             </h2>
             <p>
                 If installed globally you can just run
             </p>
-            <pre>
-<code>crest</code>
-</pre>
+            <pre><code>crest</code></pre>
             <h3>
                 Quick try
             </h3>
             <p>
                 After starting the server you can quickly try it out by issuing the following from the command line:
             </p>
-            <pre>
-<code>curl -d '{ "example key" : " }' -H "Content-Type: application/json" http://localhost:3500/tests/example</code>
-</pre>
+            <pre><code>curl -d '{ "example key" : 42 }' -H "Content-Type: application/json" http://localhost:3500/tests/example</code></pre>
             <p>
                 This should add a document to the collection <strong>example</strong> in database <strong>tests</strong> looking similar to this:
             </p>
-            <pre>
-<code>{ "A1": 201, "_id": ObjectId("4e90e196b0c7f4687000000e") }</code>
-</pre>
+            <pre><code>{ "A1": 201, "_id": ObjectId("4e90e196b0c7f4687000000e") }</code></pre>
             <h3>
                 Supported REST requests
             </h3>
-            <ul>
-                <li>
-                    <code>GET /db/collection</code> - Returns all documents
-                </li>
-                <li>
-                    <code>GET /db/collection</code> - Returns all documents (query and options in GET body)
-                </li>
-                <li>
-                    <code>GET /db/collection?query=%7B%22isDone%22%3A%20false%7D</code> - Returns all documents satisfying query
-                </li>
-                <li>
-                    <code>GET /db/collection?query=%7B%22isDone%22%3A%20false%7D&amp;limit=2&amp;skip=2</code> - Ability to add options to query (limit, skip, etc)
-                </li>
-                <li>
-                    <code>GET /db/collection/id</code> - Returns document with <em>id</em>
-                </li>
-                <li>
-                    <code>POST /db/collection</code> - Insert new document in collection (document in POST body)
-                </li>
-                <li>
-                    <code>PUT /db/collection/id</code> - Update document with <em>id</em> (updated document in PUT body)
-                </li>
-                <li>
-                    <code>DELETE /db/collection/id</code> - Delete document with <em>id</em>
-                </li>
-            </ul>
+
+            <pre><code>GET /db/collection</code></pre>
+
+            <p>Returns all documents (query and options can be sent in GET body)</p>
+
+            <pre><code>GET /db/collection?query=%7B%22isDone%22%3A%20false%7D</code></pre>
+
+            <p>Returns all documents satisfying query</p>
+
+            <pre><code>GET /db/collection?query=%7B%22isDone%22%3A%20false%7D&amp;limit=2&amp;skip=2</code></pre>
+
+            <p>Ability to add options to query (limit, skip, etc)</p>
+
+            <pre><code>GET /db/collection/id</code></pre>
+
+            <p>Returns document with <em>id</em></p>
+
+            <pre><code>POST /db/collection</code></pre>
+
+            <p>Insert new document in collection (document in POST body)</p>
+
+            <pre><code>PUT /db/collection/id</code></pre>
+
+            <p>Update document with <em>id</em> (updated document in PUT body)</p>
+
+            <pre><code>DELETE /db/collection/</code></pre>
+
+            <p>Delete document with <em>id</em></p>
+
             <h3>
                 Content Type
             </h3>
-            <ul>
-                <li>Please make sure <code>application/json</code> is used as Content-Type when using POST/PUT/GET with data in request body.
-                </li>
-            </ul>
+            <p>Please make sure <code>application/json</code> is used as Content-Type when using POST/PUT/GET with data in request body.</p>
             <h2 id="setup">
                 Setup
             </h2>
             <h3>
                 Configuration parameters
             </h3>
-            <ul>
-                <li>
-                    <code>db</code> [object]
-                    <ul>
-                        <li>
-                            <code>host</code> [string]
-                        </li>
-                        <li>
-                            <code>port</code> [string]
-                        </li>
-                        <li>
-                            <code>username</code> [string]
-                        </li>
-                        <li>
-                            <code>password</code> [string]
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <code>server</code> [object]
-                    <ul>
-                        <li>
-                            <code>port</code> [string]
-                        </li>
-                        <li>
-                            <code>address</code> [string]
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <code>flavor</code> [string] <em>mongodb</em> or <em>normal</em>
-                </li>
-                <li>
-                    <code>debug</code> [boolean]
-                </li>
-            </ul>
+
+            <p>These parameters are saved in <strong>config.json</strong>.</p>
+
+            <p>Database settings where username and password are optional.</p>
+
+<pre><code>db [object]
+    host [string]
+    port [string]
+    username [string] (optional)
+    password [string] (optional)
+</code></pre>
+
+            <p>Server settings for where and how the rest api is going to be run.</p>
+
+<pre><code>server [object]
+    port [string] 
+    address [string]
+</code></pre>
+
+            <p>General settings</p>
+
+<pre><code>flavor [string] (mongodb or normal)
+debug [boolean]
+</code></pre>
+
             <h4>
                 Flavors
             </h4>
@@ -199,23 +191,19 @@
                 Dependencies
             </h3>
             <p>
-                Application dependencies are sorted under dependencies in <em>package.json</em> while test dependencies are sorted under devDependencies. All dependencies can be installed like this
+                Application dependencies are sorted under dependencies in <em>package.json</em> while test dependencies are sorted under devDependencies.
             </p>
-            <pre>
-<code>npm install</code>
-</pre>
-            <h2 id="tests">
-                Tests
-            </h2>
-            <p>
-                Basic tests are available and can be run via <a href="http://visionmedia.github.com/mocha/">mocha</a>.
-            </p>
-            <p>
-                Recommended way to run mocha in terminal with mocha reporter <em>spec</em> chosen.
-            </p>
-            <pre>
-<code>mocha -R spec</code>
-</pre>
+
+            <h2 id="tests">Tests</h2>
+            <p>Basic tests are available and can be run via <a href="http://visionmedia.github.com/mocha/">mocha</a>.</p>
+            <p>These tests require a working mongodb installation and might require changes to <strong>config.json</strong></p>
+            <p>Recommended way to run mocha in terminal with mocha reporter <em>spec</em> chosen.</p>
+            <pre><code>mocha -R spec</code></pre>
+            <p>More indepth tests will be added at a later date.</p>
+            
+            <h2 id="bugs">Bugs</h2>
+            <p>Issues can be found at <a href="https://github.com/cordazar/crest/issues">https://github.com/cordazar/crest/issues</a>.</p>
+
             <h2 id="license">
                 License
             </h2>
@@ -230,7 +218,9 @@
             </p>
             <p>
                 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-            </p></section><footer>
+            </p>
+          </section>
+          <footer>
             <ul>
                 <li>
                     <a href="https://github.com/Cordazar/crest/zipball/master">Download <strong>ZIP File</strong></a>
@@ -246,11 +236,12 @@
                 This project is maintained by <a href="https://github.com/Cordazar">Cordazar</a>
             </p>
             <p>
-                <small>Hosted on GitHub Pages — Theme by <a href="https://github.com/orderedlist">orderedlist</a> — Theme modifications by <a href="https://github.com/Cordazar">Cordazar</a></small>
-            </p></footer>
-        </div><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript">
-</script><script src="javascripts/bootstrap.js" type="text/javascript">
-</script><script src="javascripts/scale.fix.js" type="text/javascript">
-</script>
+                <small>Hosted on GitHub Pages — Theme based on <a href="https://github.com/orderedlist/minimal">minimal</a> by <a href="https://github.com/orderedlist">orderedlist</a></small>
+            </p>
+          </footer>
+        </div>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+        <script src="javascripts/bootstrap.js" type="text/javascript"></script>
+        <script src="javascripts/scale.fix.js" type="text/javascript"></script>
     </body>
 </html>

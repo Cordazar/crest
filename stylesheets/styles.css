@@ -1,13 +1,13 @@
 @charset "UTF-8";
 
-@import "https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700";
+@import "https://fonts.googleapis.com/css?family=Lato:400italic,600italic,400,600";
 
 body
 {
   padding:50px;
   font:14px/1.5 Lato,"Helvetica Neue",Helvetica,Arial,sans-serif;
   color:#666;
-  font-weight:300;
+  font-weight:400;
   -webkit-font-smoothing: subpixel-antialiased;
 }
 
@@ -103,7 +103,7 @@ th,td
 dt
 {
   color:#444;
-  font-weight:700
+  font-weight:600
 }
 
 th
@@ -184,7 +184,7 @@ footer ul a
 strong
 {
   color:#222;
-  font-weight:700
+  font-weight:600
 }
 
 footer ul li + li
