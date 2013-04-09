@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>
+            {{ site.theme.header }} :: {{ site.theme.description }}
+        </title>
+        <link rel="stylesheet" href="style/style.css" type="text/css">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <!--[if lt IE 9]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+          ga('create', '{{ site.theme.google_analytics_uid }}', '{{ site.theme.google_analytics_site }}');
+          ga('send', 'pageview');
+        </script>
+    </head>
+    <body>
+        <div class="wrapper">
+            <header>
+                <a class="btn btn-block btn-info" href="{{ site.theme.project_url }}"><span>View On</span> <strong>GitHub</strong></a>
+            </header>
+            <section>
+                <article>
+                    {{ content }}
+                </article>
+            </section>
+            <footer>
+                <p>
+                    <small>Hosted on GitHub Pages<br />Theme based on <a href="https://github.com/orderedlist/minimal">minimal</a> by <a href="https://github.com/orderedlist">orderedlist</a></small>
+                </p>
+            </footer>
+        </div>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+        <script src="javascript/script.js" type="text/javascript"></script>
+    </body>
+</html>

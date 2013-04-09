@@ -1,0 +1,26 @@
+# Theme settings
+theme:
+
+  # Site header
+  header: Crest
+
+  # Site description
+  description: REST API Server for MongoDB built in node.js
+
+  # Github project name
+  project_name: crest
+
+  # Github project maintainer
+  project_maintainer: Cordazar
+
+  # Github project maintainer url
+  project_maintainer_url: https://github.com/Cordazar
+
+  # Github project url
+  project_url: https://github.com/Cordazar/crest
+
+  # Google analytics UID
+  google_analytics_uid: UA-39803695-1
+
+  # Google analytics site
+  google_analytics_site: github.com
