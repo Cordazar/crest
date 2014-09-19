@@ -38,7 +38,5 @@
     "test": "mocha -R spec"
   },
   "preferGlobal": true,
-  "bin": {
-    "server": "./bin/server"
-  }
+  "bin": "./bin/crest"
 }
