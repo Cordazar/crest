@@ -62,7 +62,7 @@ Insert new document in collection (document in POST body)
     PUT /db/collection/id
 Update document with _id_ (updated document in PUT body)
     
-    DELETE /db/collection/
+    DELETE /db/collection/id
 Delete document with _id_
 
 ### Content Type
