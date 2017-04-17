@@ -114,7 +114,7 @@ Recommended way to run mocha in terminal with mocha reporter _spec_ chosen.
 More indepth tests will be added at a later date. 
 
 
-##Bugs
+## Bugs
 
 Issues can be found at [https://github.com/cordazar/crest/issues](https://github.com/cordazar/crest/issues)
 
