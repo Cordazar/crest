@@ -1,7 +1,7 @@
 {
   "name": "crest",
   "description": "REST Server for MongoDB",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "Ricard Aspeljung <ricard@opendia.se>",
   "main": "server.js",
   "directories": {
@@ -39,6 +39,6 @@
   },
   "preferGlobal": true,
   "bin": {
-    "server": "./bin/server"
+    "server": "./bin/crest"
   }
 }
