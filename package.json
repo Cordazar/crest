@@ -23,12 +23,12 @@
     "url": "https://github.com/Cordazar/crest/issues"
   },
   "dependencies": {
-    "mongodb": "1.2.x",
-    "restify": "2.3.x"
+    "mongodb": "2.2.x",
+    "restify": "4.x.x"
   },
   "devDependencies": {
-    "supertest": "0.5.x",
-    "mocha": "1.8.x"
+    "supertest": "3.x.x",
+    "mocha": "3.x.x"
   },
   "license": "MIT",
   "engines": {
