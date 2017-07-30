@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "mongodb": "2.2.x",
+    "node-args": "^2.1.8",
     "restify": "4.x.x"
   },
   "devDependencies": {

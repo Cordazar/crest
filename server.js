@@ -5,7 +5,9 @@
  * crest
  */
 
-var fs = require("fs"),
+var
+  args = require("node-args"),
+  fs = require("fs"),
   mongodb = require("mongodb"),
   restify = module.exports.restify = require("restify");
 
@@ -31,7 +33,7 @@ var debug = module.exports.debug = function (str) {
 };
 
 try {
-  config = JSON.parse(fs.readFileSync(process.cwd() + "/config.json"));
+  config = JSON.parse(fs.readFileSync(process.cwd() + (args.configPath || "/config.json")));
 } catch (e) {
   debug("No config.json file found. Fall back to default config.");
 }
