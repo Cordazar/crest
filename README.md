@@ -103,7 +103,7 @@ Application dependencies are sorted under dependencies in _package.json_ while t
 
 
 ## Tests
-Basic tests are available and can be run via [mocha](http://visionmedia.github.com/mocha/). 
+Basic tests are available and can be run via [mocha](http://mochajs.org/). 
 
 These tests require a working mongodb installation and might require changes to __config.json__
 
