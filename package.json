@@ -39,6 +39,6 @@
   },
   "preferGlobal": true,
   "bin": {
-    "server": "./bin/server"
+    "server": "./bin/crest"
   }
 }
