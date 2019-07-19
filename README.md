@@ -3,6 +3,10 @@
 
 [Crest](http://github.com/cordazar/crest) is a REST API Server for MongoDB built in node.js.
 
+## Archived
+
+I finally got around to archiving this project since I have neither the time nor the use for it. If someone wants to fork and build on it, be my guest.
+
 ## About
 
 The idea for crest was born when we needed a REST API for a MongoDB project at work and the ones we found were not what we expected from 
