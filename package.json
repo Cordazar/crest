@@ -1,7 +1,7 @@
 {
   "name": "crest",
   "description": "REST Server for MongoDB",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "Ricard Aspeljung <ricard@opendia.se>",
   "main": "server.js",
   "directories": {
@@ -23,12 +23,13 @@
     "url": "https://github.com/Cordazar/crest/issues"
   },
   "dependencies": {
-    "mongodb": "1.2.x",
-    "restify": "2.3.x"
+    "mongodb": "2.2.x",
+    "node-args": "^2.1.8",
+    "restify": "4.x.x"
   },
   "devDependencies": {
-    "supertest": "0.5.x",
-    "mocha": "1.8.x"
+    "supertest": "3.x.x",
+    "mocha": "3.x.x"
   },
   "license": "MIT",
   "engines": {
@@ -39,6 +40,6 @@
   },
   "preferGlobal": true,
   "bin": {
-    "server": "./bin/server"
+    "server": "./bin/crest"
   }
 }

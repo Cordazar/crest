@@ -77,7 +77,7 @@ Please make sure `application/json` is used as Content-Type when using POST/PUT/
 
 ### Configuration parameters
 
-These parameters are saved in __config.json__.
+By default, these parameters are saved in __config.json__. An alternate path may be specified via a command line argument `--configPath=some/path/config.json`.
 
 Database settings where username and password are optional.
 
